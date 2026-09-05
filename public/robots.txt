@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /$
+Allow: /login
+Allow: /register
+Disallow: /admin
+Disallow: /beranda
+Disallow: /search
+Disallow: /hospital
+Disallow: /bookmark
+Disallow: /profile
+Disallow: /help

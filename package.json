@@ -1,0 +1,44 @@
+{
+  "name": "hospitalink",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 5173",
+    "format": "oxfmt",
+    "db:push": "node scripts/db-push.mjs",
+    "db:seed": "node scripts/seed.mjs",
+    "db:seed:test": "node scripts/seed-test-accounts.mjs",
+    "admin:create": "node scripts/create-admin.mjs",
+    "demo:purge": "node scripts/purge-demo.mjs",
+    "db:verify": "node scripts/verify.mjs",
+    "db:e2e": "node scripts/seed-test-accounts.mjs && node scripts/e2e.mjs",
+    "test:ui": "node scripts/seed-test-accounts.mjs && node scripts/ui-smoke.mjs",
+    "test:landing": "node scripts/seed-test-accounts.mjs && node scripts/landing-smoke.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
+    "framer-motion": "^13.2.0",
+    "lucide-react": "^1.33.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "oxfmt": "^0.2.0",
+    "pg": "^8.23.0",
+    "playwright-core": "^1.62.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^8.0.5"
+  }
+}
