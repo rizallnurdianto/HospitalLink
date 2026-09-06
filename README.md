@@ -1,7 +1,5 @@
 # HospitaLink
 
-**Direktori rumah sakit terpusat — cari, saring, dan tanya langsung ke admin.**
-
 Dibangun dengan React, Vite, TypeScript, dan Tailwind CSS, dengan Supabase sebagai
 backend (database, auth, storage, dan realtime).
 
@@ -9,28 +7,43 @@ backend (database, auth, storage, dan realtime).
 
 ## Daftar Isi
 
-1. [Penjelasan Aplikasi](#1-penjelasan-aplikasi)
-2. [Fitur Utama](#2-fitur-utama)
-3. [Teknologi yang Digunakan](#3-teknologi-yang-digunakan)
-4. [Cara Instalasi](#4-cara-instalasi)
-5. [Cara Penggunaan](#5-cara-penggunaan)
-6. [Struktur Proyek](#struktur-proyek)
+1. [Latar Belakang & Urgensi](#1-latar-belakang--urgensi)
+2. [Penjelasan Aplikasi](#2-penjelasan-aplikasi)
+3. [Fitur Utama](#3-fitur-utama)
+4. [Teknologi yang Digunakan](#4-teknologi-yang-digunakan)
+5. [Cara Instalasi](#5-cara-instalasi)
+6. [Cara Penggunaan](#6-cara-penggunaan)
+7. [Struktur Proyek](#struktur-proyek)
+8. [Sumber Data](#sumber-data)
 
 ---
 
-## 1. Penjelasan Aplikasi
+## 1. Latar Belakang & Urgensi
 
-Mencari informasi rumah sakit yang lengkap dan terpercaya — layanan yang tersedia,
-jadwal dokter, kelas rumah sakit, hingga cara menghubungi — sering kali tersebar di
-banyak sumber dan tidak selalu akurat. **HospitaLink** dibuat untuk menjawab masalah
-ini dengan menyediakan **satu direktori rumah sakit terpusat** yang datanya dikelola
-dan diverifikasi oleh admin, sehingga pengguna cukup mencari, menyaring, dan melihat
-detail rumah sakit dari satu tempat — termasuk bertanya langsung ke admin lewat live
-chat bila informasi yang dicari belum tersedia.
+Bayangkan situasi keluarga sedang membutuhkan rumah sakit dengan layanan jantung yang paling dekat, malam hari, dan berada di kota yang belum begitu dikenal. Dalam kondisi seperti itu, hal yang biasanya dilakukan adalah membuka Google, lalu berpindah dari satu informasi ke informasi lainnya. Mulai dari Google Maps untuk mencari lokasi, situs resmi rumah sakit kalau memang tersedia dan masih rutin diperbarui, grup WhatsApp keluarga atau tetangga untuk meminta rekomendasi, sampai media sosial untuk memastikan apakah ulasan yang ditemukan masih relevan. Semua proses tersebut membutuhkan waktu, padahal dalam situasi darurat, waktu adalah sesuatu yang sangat berharga dan tidak selalu dimiliki.
 
-> Aplikasi ini murni untuk **pencarian informasi rumah sakit**, bukan aplikasi rekam
-> medis atau layanan kesehatan pasien — karena itu pengguna umum disebut **"Pengguna"**,
-> bukan "Pasien", dan tidak ada data kesehatan pribadi yang disimpan.
+Ini bukan sekadar masalah yang kami buat untuk kebutuhan proposal. Beberapa data berikut menunjukkan bahwa persoalan ini memang memiliki skala yang cukup besar:
+
+* Indonesia memiliki ribuan rumah sakit yang tersebar dari Sabang sampai Merauke. Dalam proses validasi kebijakan Kelas Rawat Inap Standar (KRIS), Kementerian Kesehatan mencatat sekitar 3.057-3.228 rumah sakit di seluruh Indonesia yang menjadi acuan kebijakan tersebut sepanjang 2024-2025. Sayangnya, sebanyak itu informasi belum benar-benar terkumpul dalam satu tempat yang mudah dan dapat diandalkan oleh masyarakat. Sebagian besar data masih tersebar di situs masing-masing rumah sakit, forum, maupun ulasan yang belum tentu terverifikasi.
+
+* Di sisi lain, informasi mengenai kesehatan justru menjadi salah satu topik yang paling banyak dicari masyarakat Indonesia secara online. Berdasarkan Survei Penetrasi & Perilaku Internet APJII 2023, konten seputar kesehatan bahkan berada di atas olahraga dan hiburan dalam hal pencarian. Artinya, kebutuhan masyarakat terhadap informasi kesehatan sebenarnya sudah sangat besar. Yang masih menjadi persoalan adalah bagaimana informasi tersebut bisa disajikan melalui saluran yang dapat dipercaya.
+
+* Penetrasi internet nasional pada 2026 juga sudah mencapai 81,72%, atau sekitar 235 juta orang yang terhubung ke internet. Secara logika, jumlah pengguna sebesar ini seharusnya membuat akses terhadap informasi menjadi jauh lebih mudah. Namun pada kenyataannya, kondisi tersebut juga bisa menimbulkan masalah baru. Semakin banyak sumber informasi yang tersedia, semakin besar pula kemungkinan masyarakat menemukan informasi yang sudah tidak diperbarui atau bahkan tidak akurat.
+
+* Kelas rumah sakit, yaitu A, B, C, dan D berdasarkan Permenkes No. 3 Tahun 2020, juga menentukan hal-hal yang cukup konkret, mulai dari jenis layanan spesialis, jumlah tempat tidur, hingga peralatan medis yang tersedia. Perbedaan antar kelas rumah sakit tersebut cukup signifikan. Karena itu, ketika pasien atau keluarga memiliki ekspektasi yang keliru terhadap kemampuan sebuah rumah sakit, masalahnya bisa menjadi cukup serius. Hal ini juga bukan sesuatu yang jarang terjadi. Catatan Ombudsman RI di berbagai daerah berulang kali menunjukkan adanya keluhan mengenai pelayanan informasi kepada pasien dan keluarganya.
+
+Kalau semua hal tersebut ditarik ke satu kesimpulan, sebenarnya informasi mengenai rumah sakit di Indonesia bukan tidak ada. Justru sebaliknya, jumlahnya sangat banyak. Masalahnya, informasi tersebut masih tersebar di berbagai tempat, tidak selalu melalui proses verifikasi, dan bisa dengan mudah menjadi tidak relevan ketika terjadi perubahan pada kelas rumah sakit, layanan yang tersedia, maupun jadwal dokter.
+
+Dari kebutuhan itulah HospitaLink lahir. HospitaLink bukan aplikasi rekam medis dan bukan pula sekadar agregator ulasan rumah sakit. HospitaLink dirancang sebagai direktori terpusat, di mana setiap data dikelola dan diverifikasi oleh admin. Ketika ada informasi yang belum terjawab di halaman detail rumah sakit, pengguna juga dapat langsung menanyakannya melalui fitur live chat. Dengan begitu, masyarakat tidak perlu lagi mengandalkan tebakan, mencari informasi dari forum yang belum tentu terpercaya, atau bertanya dari satu grup keluarga ke grup lainnya hanya untuk mendapatkan informasi dasar mengenai sebuah rumah sakit.
+
+> Aplikasi ini murni untuk **pencarian informasi rumah sakit**, bukan aplikasi
+> rekam medis atau layanan kesehatan pasien, karena itu pengguna umum disebut
+> **"Pengguna"**, bukan "Pasien", dan tidak ada data kesehatan pribadi yang
+> disimpan.
+
+---
+
+## 2. Penjelasan Aplikasi
 
 Dari satu basis kode, HospitaLink menyajikan tiga bagian:
 
@@ -38,39 +51,45 @@ Dari satu basis kode, HospitaLink menyajikan tiga bagian:
 | --- | --- | --- |
 | **Landing Page** | Publik | Memperkenalkan produk sebelum masuk/daftar |
 | **Portal Pengguna** | Siapa saja yang mencari rumah sakit | Cari & saring, simpan favorit, lihat detail, chat dengan admin |
-| **Portal Admin** | Pengelola aplikasi | Kelola direktori rumah sakit, akun pengguna, kotak masuk chat, dan pengaturan — sumber kebenaran tunggal yang dibaca Portal Pengguna |
+| **Portal Admin** | Pengelola aplikasi | Kelola direktori rumah sakit, akun pengguna, kotak masuk chat, dan pengaturan sumber kebenaran tunggal yang dibaca Portal Pengguna |
+
+Prinsip di baliknya sederhana: satu sumber data yang dijaga admin, dibaca oleh
+banyak pengguna, dan setiap celah informasi yang belum tercakup ditutup lewat
+percakapan langsung — bukan dibiarkan jadi tebakan.
 
 ---
 
-## 2. Fitur Utama
+## 3. Fitur Utama
 
 - **Direktori rumah sakit nasional** — mencakup provinsi, jenis kepemilikan
-  (Swasta/Pemerintah), kategori (RSU, RSIA, RS Jantung, dll.), dan kelas rumah sakit
-  (A/B/C/D sesuai Permenkes), lengkap dengan galeri foto.
-- **Pencarian & filter** — cari berdasarkan nama, layanan, kategori, kelas, maupun
-  provinsi.
+  (Swasta/Pemerintah), kategori (RSU, RSIA, RS Jantung, dll.), dan kelas rumah
+  sakit (A/B/C/D sesuai Permenkes), lengkap dengan galeri foto.
+- **Pencarian & filter** — cari berdasarkan nama, layanan, kategori, kelas,
+  maupun provinsi.
 - **Bookmark** — simpan rumah sakit favorit untuk diakses kembali dengan cepat.
-- **Live chat dengan Admin** — satu ruang obrolan berkelanjutan per pengguna; admin
-  dapat mengirim "kartu rumah sakit" langsung di dalam chat yang bisa diklik menuju
-  halaman detail.
+- **Live chat dengan Admin** — satu ruang obrolan berkelanjutan per pengguna;
+  admin dapat mengirim "kartu rumah sakit" langsung di dalam chat yang bisa
+  diklik menuju halaman detail.
 - **Autentikasi fleksibel** — daftar/masuk dengan email-password atau **Google
-  Sign-In**, lupa/atur ulang kata sandi, dan onboarding satu kali untuk melengkapi
-  profil (nama, nomor HP, provinsi).
-- **Notifikasi real-time** — bel notifikasi untuk balasan admin, rumah sakit baru,
-  dan pengumuman, tanpa perlu refresh halaman (Supabase Realtime).
-- **Portal Admin lengkap** — CRUD direktori rumah sakit + upload galeri foto, kelola
-  akun pengguna (aktif/nonaktif), kotak masuk chat terpusat, dan pengaturan aplikasi.
+  Sign-In**, lupa/atur ulang kata sandi, dan onboarding satu kali untuk
+  melengkapi profil (nama, nomor HP, provinsi).
+- **Notifikasi real-time** — bel notifikasi untuk balasan admin, rumah sakit
+  baru, dan pengumuman, tanpa perlu refresh halaman (Supabase Realtime).
+- **Portal Admin lengkap** — CRUD direktori rumah sakit + upload galeri foto,
+  kelola akun pengguna (aktif/nonaktif), kotak masuk chat terpusat, dan
+  pengaturan aplikasi.
 - **Keamanan berbasis Row Level Security (RLS)** — setiap pengguna hanya bisa
-  melihat/mengubah datanya sendiri; hanya admin yang bisa mengelola direktori dan
-  pengaturan. Hanya ada **satu** akun admin, dijamin oleh constraint database.
-- **Hapus akun mandiri** — pengguna bisa menghapus akunnya sendiri beserta seluruh
-  data terkait langsung dari halaman profil.
+  melihat/mengubah datanya sendiri; hanya admin yang bisa mengelola direktori
+  dan pengaturan. Hanya ada **satu** akun admin, dijamin oleh constraint
+  database.
+- **Hapus akun mandiri** — pengguna bisa menghapus akunnya sendiri beserta
+  seluruh data terkait langsung dari halaman profil.
 - **Desain konsisten & responsif** — satu design system (`src/components/ui`)
   dipakai bersama oleh landing page, Portal Pengguna, dan Portal Admin.
 
 ---
 
-## 3. Teknologi yang Digunakan
+## 4. Teknologi yang Digunakan
 
 ### Frontend
 
@@ -105,7 +124,7 @@ Dari satu basis kode, HospitaLink menyajikan tiga bagian:
 
 ---
 
-## 4. Cara Instalasi
+## 5. Cara Instalasi
 
 **Prasyarat:** Node.js 22, pnpm, dan sebuah [project Supabase](https://supabase.com/).
 
@@ -150,12 +169,12 @@ pengembangan lokal.
 ### 5) (Opsional) Terapkan template email ter-branding
 
 Buka **Authentication → Email Templates** di Supabase Dashboard, lalu tempel isi file
-HTML dari `supabase/email-templates/` untuk masing-masing jenis email (konfirmasi
+HTML dari `supabase/email-templates/` untuk masing - masing jenis email (konfirmasi
 daftar, reset password, magic link).
 
 ---
 
-## 5. Cara Penggunaan
+## 6. Cara Penggunaan
 
 ### Menjalankan mode pengembangan (Hot Module Replacement)
 
@@ -207,6 +226,21 @@ Setelah `pnpm dev` berjalan, buka `http://localhost:5173`:
 - Daftar akun baru lewat `/register` (atau "Daftar dengan Google") untuk mencoba
   Portal Pengguna — cari rumah sakit, simpan bookmark, dan chat dengan admin.
 
+#### Akun demo admin
+
+Untuk keperluan review/penjurian, berikut akun admin yang sudah disiapkan lewat
+`pnpm admin:create`. Masuk di `http://localhost:5173/login`, lalu akses Portal
+Admin di `/admin`:
+
+| Email | Password |
+| --- | --- |
+| `admin@hospitalink.test` | `Admin12345!` |
+
+> Ini akun demo/testing, bukan akun produksi. Kalau project sudah dipakai secara
+> nyata, ganti passwordnya lewat halaman profil atau buat ulang lewat
+> `pnpm admin:create` dengan `SEED_ADMIN_EMAIL`/`SEED_ADMIN_PASSWORD` yang baru,
+> lalu hapus baris kredensial ini dari README sebelum dipublikasikan.
+
 ---
 
 ## Struktur Proyek
@@ -231,3 +265,20 @@ HospitaLink/
 ├── scripts/              # Script Node.js: migrasi, seeding, admin, testing
 └── public/                # Aset statis
 ```
+
+---
+
+## Sumber Data
+
+1: Kontan.co.id, *"Rumah Sakit Belum Siap Laksanakan Kebijakan KRIS, Persi Ungkap Kendalanya"*, 30 Mei 2025.
+
+2: Kontan.co.id, *"Menkes: Implementasi Layanan Kelas Rawat Inap Standar (KRIS) Ditargetkan Juni 2025"*, 11 Februari 2025.
+
+3: APJII, *Survei Penetrasi & Perilaku Internet Indonesia 2023*.
+
+4: APJII, *Survei Penetrasi & Perilaku Internet Indonesia 2026* (dirilis Mei 2026), sebagaimana dilaporkan detikInet.
+
+5: Peraturan Menteri Kesehatan Republik Indonesia Nomor 3 Tahun 2020 tentang Klasifikasi dan Perizinan Rumah Sakit.
+
+6: Kumpulan laporan Ombudsman RI perwakilan daerah (2018–2025) terkait keluhan pelayanan informasi rumah sakit kepada pasien dan keluarga.
+
